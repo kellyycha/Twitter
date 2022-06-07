@@ -29,6 +29,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     public static final String TAG = "TimelineActivity";
 
+
     TwitterClient client;
     RecyclerView rvTweets;
     List<Tweet> tweets;
