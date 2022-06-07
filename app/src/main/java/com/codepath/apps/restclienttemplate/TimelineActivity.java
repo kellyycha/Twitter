@@ -63,7 +63,6 @@ public class TimelineActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     @Override
@@ -77,8 +76,9 @@ public class TimelineActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.compose) {
             // compose icon has been selected
-            Toast.makeText(this,"Compose!", Toast.LENGTH_SHORT).show();
             // navigate to the compose activity
+            Intent intent = new Intent(this, ComposeActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
