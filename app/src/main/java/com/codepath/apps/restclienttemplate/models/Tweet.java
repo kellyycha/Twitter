@@ -1,5 +1,8 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.provider.MediaStore;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +16,7 @@ public class Tweet {
     public String body;
     public String createdAt;
     public User user;
+    public String media;
 
     // empty constructor needed by the parceler library
     public Tweet(){}
@@ -22,6 +26,14 @@ public class Tweet {
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        if(!jsonObject.getJSONObject("entities").has("media")){
+            Log.d("TWEET","No pic");
+            tweet.media = "none";
+        }
+        else{
+            Log.d("TWEET HAS PIC", jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getString("media_url"));
+            tweet.media = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getString("media_url");
+        }
         return tweet;
     }
 
