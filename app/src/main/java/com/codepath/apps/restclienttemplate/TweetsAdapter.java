@@ -56,6 +56,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvBody;
         TextView tvScreenName;
         ImageView ivMedia;
+        TextView tvTime;
 
         public ViewHolder(@NonNull View itemView) {
             // itemView is one representation of one row in the recylerview, aka a tweet
@@ -64,15 +65,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody = itemView.findViewById(R.id.tvBody);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
             ivMedia = itemView.findViewById(R.id.ivMedia);
+            tvTime = itemView.findViewById(R.id.tvTime);
         }
 
         // this sets the variable based on the tweet
         public void bind(Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
+            tvTime.setText(tweet.relativeTime);
             // Glide is used to load pictures
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
-
             if(tweet.media != "none"){
                 Glide.with(context).load(tweet.media).into(ivMedia);
             }
