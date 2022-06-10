@@ -35,7 +35,7 @@ public class ComposeActivity extends AppCompatActivity {
     EditText etCompose;
     Button btnTweet;
     Button bCancel;
-    ImageView ivProfilePic;
+    //ImageView ivProfilePic;
 
     TwitterClient client;
 
@@ -49,26 +49,18 @@ public class ComposeActivity extends AppCompatActivity {
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
         bCancel = findViewById(R.id.bCancel);
-        ivProfilePic = findViewById(R.id.ivProfilePic);
-        int profileRadius = 100;
+        //ivProfilePic = findViewById(R.id.ivProfilePic);
+//        int profileRadius = 100;
 
         // TODO: profile pic in creating tweet
 //        Glide.with(this)
-//                .load(User.profileImageUrl)
+//                .load(User.myProfile)
 //                .transform(new RoundedCorners(profileRadius))
 //                .into(ivProfilePic);
-        ivProfilePic.setVisibility(View.GONE);
-
-        // Set click listener on cancel button
-        bCancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        //ivProfilePic.setVisibility(View.GONE);
 
         // Set click listener on tweet button
         btnTweet.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 String tweetContent = etCompose.getText().toString();
                 if (tweetContent.isEmpty()) {
@@ -107,6 +99,12 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
 
+        // Set click listener on cancel button
+        bCancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 }

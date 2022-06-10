@@ -10,6 +10,7 @@ public class User {
     public String name;
     public String screenName;
     public String profileImageUrl;
+    //public static String myProfile;
 
     // empty constructor needed by the parceler library
     public User(){}
@@ -19,6 +20,9 @@ public class User {
         user.name = jsonObject.getString("name");
         user.screenName = jsonObject.getString("screen_name");
         user.profileImageUrl = jsonObject.getString("profile_image_url_https");
+//        if (jsonObject == mine){
+//            user.myProfile = jsonObject.getString("profile_image_url_https");
+//        }
         return user;
     }
 }

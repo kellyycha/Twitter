@@ -86,7 +86,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         .load(tweet.media)
                         .transform(new RoundedCorners(mediaRadius))
                         .into(ivMedia);
-
             }
             else{
                 ivMedia.setVisibility(View.GONE);
