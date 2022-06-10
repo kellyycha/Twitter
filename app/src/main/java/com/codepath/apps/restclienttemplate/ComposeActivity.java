@@ -3,19 +3,26 @@ package com.codepath.apps.restclienttemplate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONException;
 import org.parceler.Parcels;
+
+import java.util.ResourceBundle;
 
 import okhttp3.Headers;
 
@@ -27,6 +34,8 @@ public class ComposeActivity extends AppCompatActivity {
 
     EditText etCompose;
     Button btnTweet;
+    Button bCancel;
+    ImageView ivProfilePic;
 
     TwitterClient client;
 
@@ -39,8 +48,25 @@ public class ComposeActivity extends AppCompatActivity {
 
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
+        bCancel = findViewById(R.id.bCancel);
+        ivProfilePic = findViewById(R.id.ivProfilePic);
+        int profileRadius = 100;
 
-        // Set click listener on button
+        // TODO: profile pic in creating tweet
+//        Glide.with(this)
+//                .load(User.profileImageUrl)
+//                .transform(new RoundedCorners(profileRadius))
+//                .into(ivProfilePic);
+        ivProfilePic.setVisibility(View.GONE);
+
+        // Set click listener on cancel button
+        bCancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        // Set click listener on tweet button
         btnTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +87,7 @@ public class ComposeActivity extends AppCompatActivity {
                         Log.i(TAG, "onSuccess to publish tweet");
                         try {
                             Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG,"Published tweet says: " + tweet.body);
+                            Log.i(TAG, "Published tweet says: " + tweet.body);
                             Intent intent = new Intent();
                             intent.putExtra("tweet", Parcels.wrap(tweet));
                             // set result code and bundle data for response
@@ -80,5 +106,7 @@ public class ComposeActivity extends AppCompatActivity {
                 });
             }
         });
+
+
     }
 }

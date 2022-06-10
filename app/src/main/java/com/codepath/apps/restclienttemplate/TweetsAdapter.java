@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import java.util.List;
@@ -70,13 +71,22 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
         // this sets the variable based on the tweet
         public void bind(Tweet tweet) {
+            int mediaRadius = 30;
+            int profileRadius = 100;
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
             tvTime.setText(tweet.relativeTime);
             // Glide is used to load pictures
-            Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+            Glide.with(context)
+                    .load(tweet.user.profileImageUrl)
+                    .transform(new RoundedCorners(profileRadius))
+                    .into(ivProfileImage);
             if(tweet.media != "none"){
-                Glide.with(context).load(tweet.media).into(ivMedia);
+                Glide.with(context)
+                        .load(tweet.media)
+                        .transform(new RoundedCorners(mediaRadius))
+                        .into(ivMedia);
+
             }
             else{
                 ivMedia.setVisibility(View.GONE);

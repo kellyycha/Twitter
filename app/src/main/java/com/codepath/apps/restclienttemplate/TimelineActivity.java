@@ -39,7 +39,27 @@ public class TimelineActivity extends AppCompatActivity {
     RecyclerView rvTweets;
     List<Tweet> tweets;
     TweetsAdapter adapter;
-    Button bLogOut;
+    Button bAdd;
+
+//    // Instance of the progress action-view
+//    MenuItem miActionProgressItem;
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        // Store instance of the menu item containing progress
+//        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+//
+//        // Return to finish
+//        return super.onPrepareOptionsMenu(menu);
+//    }
+//    public void showProgressBar() {
+//        // Show progress item
+//        miActionProgressItem.setVisible(true);
+//    }
+//
+//    public void hideProgressBar() {
+//        // Hide progress item
+//        miActionProgressItem.setVisible(false);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +100,15 @@ public class TimelineActivity extends AppCompatActivity {
 
         populateHomeTimeline();
 
-        // button
-        bLogOut = findViewById(R.id.bLogOut);
-        bLogOut.setOnClickListener(new View.OnClickListener() {
+        bAdd = findViewById(R.id.bAdd);
+        bAdd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                onLogoutButton();
-                finish();
+                Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
     }
+
 
     public void fetchTimelineAsync(int page) {
         // Send the network request to fetch the updated data
@@ -126,11 +146,10 @@ public class TimelineActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.compose) {
+        if (item.getItemId() == R.id.logOut) {
             // compose icon has been selected
             // navigate to the compose activity
-            Intent intent = new Intent(this, ComposeActivity.class);
-            startActivityForResult(intent, REQUEST_CODE);
+            onLogoutButton();
             return true;
         }
         return super.onOptionsItemSelected(item);
